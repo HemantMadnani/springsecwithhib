@@ -26,31 +26,24 @@ public class UserSecurityService implements UserDetailsService {
 
 		final User user = userDao.getUserByEmail(username);
 		final List<String> authorities = new ArrayList<>();
-		System.err.println(user.getEmail());
-		System.err.println(user);
 		user.getRoles().forEach(role -> {
 
-			System.err.println(role.getName());
 			authorities.add(role.getName());
 		});
 		user.getRoles().forEach(role -> {
 			role.getAuthorities().forEach(auth -> {
-				System.err.println(auth.getName());
 				authorities.add(auth.getName());
 			});
 		});
-		System.err.println(user.getPassword());
 		if (user != null) {
 			if (!user.isActive()) {
-				System.err.println("locked....");
 				throw new DisabledException("Your account is locked");
 			} else {
-				System.err.println("retunr new user...");
 				return new UserSecurity(user, authorities.stream().distinct().collect(Collectors.toList()));
 			}
 		}
-
 		throw new UsernameNotFoundException("Invalid email or password!!! Please try again");
+
 	}
 
 }
