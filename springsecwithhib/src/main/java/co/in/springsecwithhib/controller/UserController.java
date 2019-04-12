@@ -3,6 +3,8 @@ package co.in.springsecwithhib.controller;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,23 @@ import co.in.springsecwithhib.model.Authority;
 import co.in.springsecwithhib.model.Role;
 import co.in.springsecwithhib.model.User;
 
+/**
+ * The <code>UserController</code> is used to manage the user management process in springsecwithhib project.
+ *
+ * @author hemant.madnani
+ *
+ */
 @RestController
 public class UserController extends BaseController {
 
+	private static final Log LOGGER = LogFactory.getLog(UserController.class);
+
+	/**
+	 * The <code>addUser</code> is used to add the user after the registration process.
+	 *
+	 * @param userDto
+	 * @return
+	 */
 	@PostMapping("/adduser")
 	public ModelAndView addUser(@ModelAttribute final UserDto userDto) {
 
@@ -32,6 +48,11 @@ public class UserController extends BaseController {
 		return modelAndView;
 	}
 
+	/**
+	 * The <code>listUsers</code> is used to list all the users in the application.
+	 *
+	 * @return
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/home/listusers")
 	public ModelAndView listUsers() {
@@ -42,6 +63,9 @@ public class UserController extends BaseController {
 		return modelAndView;
 	}
 
+	/**
+	 * The <code> addTestUser</code> is to add the some test data in the database.
+	 */
 	@GetMapping("/addTest")
 	public void addTestUser() {
 
@@ -101,7 +125,7 @@ public class UserController extends BaseController {
 			user2.setRoles(roles2);
 			getServiceRegistry().getUserService().addUser(user2);
 		} catch (final Exception e) {
-
+			LOGGER.error(e);
 		}
 	}
 

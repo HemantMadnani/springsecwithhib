@@ -12,22 +12,46 @@ import org.springframework.web.servlet.ModelAndView;
 import co.in.springsecwithhib.dto.UserDto;
 import co.in.springsecwithhib.model.User;
 
+/**
+ *
+ * The <code>HomeController</code> is used to manage login and registration process in springsecwithhib project.
+ *
+ * @author hemant.madnani
+ *
+ */
 @RestController
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class HomeController extends BaseController {
 
+	/**
+	 * The <code>loadIndex</code> is used to load the index page of springsecwithhib project.
+	 *
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/")
-	public ModelAndView test(final HttpServletResponse response) {
+	public ModelAndView loadIndex(final HttpServletResponse response) {
 
 		return new ModelAndView("home");
 	}
 
+	/**
+	 * The <code>loadHome</code> is used to load the home page of springsecwithhib project.
+	 *
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/home")
-	public ModelAndView testHome(final HttpServletResponse response) {
+	public ModelAndView loadHome(final HttpServletResponse response) {
 
 		return new ModelAndView("welcome");
 	}
 
+	/**
+	 * The <code>loadLogin</code> is used to load the login page of springsecwithhib project.
+	 *
+	 * @return
+	 */
 	@GetMapping("/login")
 	public ModelAndView loadLogin() {
 
@@ -40,6 +64,11 @@ public class HomeController extends BaseController {
 		return modelAndView;
 	}
 
+	/**
+	 * The <code>loadRegistration</code> is used to load the registration page of springsecwithhib project.
+	 *
+	 * @return
+	 */
 	@GetMapping("/register")
 	public ModelAndView loadRegistration() {
 

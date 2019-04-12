@@ -10,15 +10,31 @@ import org.springframework.web.servlet.ModelAndView;
 import co.in.springsecwithhib.dto.RoleDto;
 import co.in.springsecwithhib.model.Role;
 
+/**
+ * The <code>RoleController</code> is used manage the role management process in springsecwithhib project.
+ *
+ * @author hemant.madnani
+ *
+ */
 @RestController
 public class RoleController extends BaseController {
 
+	/**
+	 * The <code>viewRoles</code> is used to view all the roles.
+	 *
+	 * @return
+	 */
 	@GetMapping("/home/viewroles")
 	public ModelAndView viewRoles() {
 
 		return new ModelAndView("listroles", "roles", getServiceRegistry().getRoleService().getAllRole());
 	}
 
+	/**
+	 * The <code>addRole</code> is used to load the add role page.
+	 *
+	 * @return
+	 */
 	@GetMapping("/home/addrole")
 	public ModelAndView addRole() {
 
@@ -29,6 +45,12 @@ public class RoleController extends BaseController {
 		return modelAndView;
 	}
 
+	/**
+	 * The <code>saveRole</code> is used to save the role.
+	 *
+	 * @param roleDto
+	 * @return
+	 */
 	@PostMapping("/home/saverole")
 	public ModelAndView saveRole(@ModelAttribute final RoleDto roleDto) {
 
